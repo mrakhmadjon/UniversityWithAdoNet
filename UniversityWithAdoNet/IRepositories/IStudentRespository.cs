@@ -10,13 +10,13 @@ namespace UniversityWithAdoNet.IRepositories
      interface IStudentRespository
     {
         void Create(Student student);
-        Student ReadAll();
+        IList<Student> ReadAll();
 
         Student GetById(int id);
         void Update(Student student);
 
         void Delete(int id);
 
-       
+        string GetStudentGroupAndTeacher(int id);
     }
 }

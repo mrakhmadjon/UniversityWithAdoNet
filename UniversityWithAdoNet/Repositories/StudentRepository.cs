@@ -90,10 +90,55 @@ namespace UniversityWithAdoNet.Repositories
             
         }
 
-        public Student ReadAll()
+        public string GetStudentGroupAndTeacher(int id)
         {
+            con.Open();
+            try
+            {
+                string query = $"select student.firstname,name from\"group\" join  \"student\" on \"group\".id = \"student\".group_id where \"student\".id = {id}";
+
+                NpgsqlCommand com = new NpgsqlCommand(query, con);
+
+                NpgsqlDataReader reader = com.ExecuteReader();
+                reader.Read();
+                return reader.GetString(0) + " " + reader.GetString(1);
+            }
+            catch (Exception ex)
+            {
+
+                return ex.Message;
+            }
+           
+        }
+
+        public IList<Student> ReadAll()
+        {
+
+            con.Open();
+
+            string query = "select * from student";
+
+            NpgsqlCommand cmd = new NpgsqlCommand(query, con);
             
-            return new Student();
+            IList<Student> students = new List<Student>();
+
+            NpgsqlDataReader reader =  cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                students.Add(new Student()
+                {
+                    Id = reader.GetInt32(0),
+                    FirstName = reader.GetString(1),
+                    LastName = reader.GetString(2),
+                    Age = reader.GetInt32(3),
+                    Course_id = reader.GetInt32(4),
+                    group_id = reader.GetInt32(5),
+                    PhoneNum = reader.GetString(6)
+                });
+            }
+            con.Close();
+            return students;
+
         }
 
         public void Update(Student student)

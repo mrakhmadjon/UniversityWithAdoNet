@@ -1,7 +1,10 @@
 ﻿using Npgsql;
 using System;
+using System.Collections.Generic;
+using UniversityWithAdoNet.GetInfo;
 using UniversityWithAdoNet.Models;
 using UniversityWithAdoNet.Repositories;
+
 
 namespace UniversityWithAdoNet
 {
@@ -10,87 +13,41 @@ namespace UniversityWithAdoNet
         static void Main(string[] args)
         {
             StudentRepository rep = new StudentRepository();
+            GetStudentInfo getStudentInfo = new GetStudentInfo();
 
-            #region Create
-            //Student student = new Student()
-            //{
-            //    FirstName = "Sardor",
-            //    LastName = "Jorayev",
-            //    Age = 20,
-            //    Course_id = 5,
-            //    group_id = 1,
-            //    PhoneNum = "1234567890000"
-
-            //};
-
-
-            //rep.Create(student);
+            #region student create
+            //rep.Create(getStudentInfo.GetStudent());
             #endregion
 
             #region student delete
-            //DelStart:
-            //int delId;
-            //try
-            //{
-            //    Console.WriteLine("Delete qilmoqchi bo'lgan studentni ID sini kiriting");
-            //     delId = int.Parse(Console.ReadLine());
 
-            //}
-            //catch 
-            //{
-
-            //    Console.WriteLine("Id ni int tipida kiriting");
-            //    goto DelStart;
-            //}
-            //rep.Delete(delId);
+            //rep.Delete(getStudentInfo.GetStudentId());
 
             #endregion
 
             #region student update
-
-
-
-            //Console.WriteLine("O'zgartirmoqchi bolgan studentni idsini kiriting");
-            //int _id = int.Parse(Console.ReadLine());
-            //Console.WriteLine("Firstname");
-            //string firstname = Console.ReadLine();
-            //Console.WriteLine("Lastname");
-            //string lastname = Console.ReadLine();
-            //Console.WriteLine("Age");
-            //int age = int.Parse(Console.ReadLine());
-            //Console.WriteLine("Course");
-            //int course = int.Parse(Console.ReadLine());
-            //Console.WriteLine("Group id ");
-            //int groupId = int.Parse(Console.ReadLine());
-            //Console.WriteLine("Phone number");
-            //string phone = Console.ReadLine();
-
-
-            //Student student = new Student()
-            //{
-            //    Id = _id,
-            //    FirstName = firstname,
-            //    LastName = lastname,
-            //    Age = age,
-            //    Course_id = course,
-            //    group_id = groupId,
-            //    PhoneNum = phone
-
-            //};
-
-            //rep.Update(student);
-
+            //rep.Update(getStudentInfo.GetStudentUpdateInfo());
             #endregion
 
             #region student getbyid
 
+            //Student stu = rep.GetById(getStudentInfo.GetStudentId());
 
-            Console.WriteLine("Id ni kiriting");
-            int id = int.Parse(Console.ReadLine());
-            Student stu = rep.GetById(id);
+            //if (stu == null)
+            //    Console.WriteLine(1001);
 
-            if (stu == null)
-                Console.WriteLine(1001);
+            #endregion
+
+            #region student readall
+            //IList<Student> students = rep.ReadAll();
+            //foreach (Student student in students)
+            //    Console.WriteLine(student.FirstName);
+            #endregion
+
+            #region student group and teacher
+
+            Console.WriteLine("Guruhini bilmoqchi bolgan studentni ID sini kiriting");
+            Console.WriteLine(rep.GetStudentGroupAndTeacher(getStudentInfo.GetStudentId()));
 
             #endregion
 
