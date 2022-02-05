@@ -18,28 +18,76 @@ namespace UniversityWithAdoNet.Repositories
         {
             
             con.Open();
-
-            string query = "insert into student (firstname, lastname, age, course, group_id, phonenum)" +
+            try
+            {                                                                                 
+                string query = "insert into student (firstname, lastname, age, course, group_id, phonenum)" +
                 $"values('{stu.FirstName}', '{stu.LastName}', {stu.Age}, {stu.Course_id}, {stu.group_id}, '{stu.PhoneNum}')";
 
-            NpgsqlCommand cmd = new NpgsqlCommand(query, con);
+                NpgsqlCommand cmd = new NpgsqlCommand(query, con);
 
-            int created = cmd.ExecuteNonQuery();
-            con.Close();
-            if (created > 0)
-                Console.WriteLine("Qo'shildi");
+                int created = cmd.ExecuteNonQuery();
+                con.Close();
+                if (created > 0)
+                    Console.WriteLine("Qo'shildi");
+                else
+                    Console.WriteLine("Qo'shilmadi");
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine("Student malumotlarini toldirayotgan Xatolik\n" + ex.Message);
+            }
+
+            
+        }
+
+        public void Delete(int _id)
+        {
+            con.Open();
+
+            string delQuery = $"delete from student where id = {_id}";
+            NpgsqlCommand cmd = new NpgsqlCommand(delQuery, con);
+
+            int isDeleted = cmd.ExecuteNonQuery();
+            if (isDeleted > 0)
+                Console.WriteLine("Bu id dagi student o'chirildi");
             else
-                Console.WriteLine("Qo'shilmadi");
+                Console.WriteLine("bunday Id dagi inson yo'q");
         }
 
-        public void Delete(Student student)
+        public Student GetById(int _id)
         {
-            throw new NotImplementedException();
-        }
+            con.Open();
+            try
+            {
+                string query = $"select * from student where id = {_id}";
 
-        public Student GetById(int id)
-        {
-            throw new NotImplementedException();
+                NpgsqlCommand com = new NpgsqlCommand(query, con);
+
+                NpgsqlDataReader reader = com.ExecuteReader();
+                reader.Read();
+                Student student = new Student()
+                {
+
+                    Id = reader.GetInt32(0),
+                    FirstName = reader.GetString(1),
+                    LastName = reader.GetString(2),
+                    Age = reader.GetInt32(3),
+                    Course_id = reader.GetInt32(4),
+                    group_id = reader.GetInt32(5),
+                    PhoneNum = reader.GetString(6)
+                };
+
+                con.Close();
+                return student;
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+            
         }
 
         public Student ReadAll()
@@ -50,7 +98,27 @@ namespace UniversityWithAdoNet.Repositories
 
         public void Update(Student student)
         {
-            throw new NotImplementedException();
+            con.Open();
+            try
+            {
+                string updQuery = $"update student set firstname = '{student.FirstName}',lastname = '{student.LastName}', age = {student.Age}" +
+                $"course = {student.Course_id}, group_id = {student.group_id},phonenum = '{student.PhoneNum}' where id = {student.Id}";
+                NpgsqlCommand cmd = new NpgsqlCommand(updQuery, con);
+
+                int isUpdated = cmd.ExecuteNonQuery();
+
+                if (isUpdated > 0)
+                    Console.WriteLine("Yangilandi");
+                else
+                    Console.WriteLine("Yangilashda Xatolik Yuz Berdi");
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine( ex.Message) ;
+            }
+            con.Close();
+
         }
     }
 }
