@@ -47,10 +47,18 @@ namespace UniversityWithAdoNet
 
             #region student group 
                                                                                     
-            Console.WriteLine("Guruhini bilmoqchi bolgan studentni ID sini kiriting");
-            Console.WriteLine(rep.GetStudentGroup(getStudentInfo.GetStudentId()));
+            //Console.WriteLine("Guruhini bilmoqchi bolgan studentni ID sini kiriting");
+            //Console.WriteLine(rep.GetStudentGroup(getStudentInfo.GetStudentId()));
 
             #endregion
+
+            #region student getteacherandsubject
+            
+            //string studentTeacherSubject = rep.GetStudentTeacherAndSubject(getStudentInfo.GetStudentId());
+            //Console.WriteLine(studentTeacherSubject);
+
+            #endregion
+
 
         }
     }

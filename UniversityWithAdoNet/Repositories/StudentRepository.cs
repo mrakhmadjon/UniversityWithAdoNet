@@ -111,27 +111,30 @@ namespace UniversityWithAdoNet.Repositories
            
         }
 
-        public string GetStudentTeacherAndSubject(int id)
+        public string GetStudentTeacherAndSubject(int _id)
         {
             con.Open();
             try
             {
-                string query = "select student.firstname, teacher.firstname,\"subject\".name  from student" +
-                           "join \"group\" on student.group_id = \"group\".id" +
-                           "join teacher on \"group\".id = teacher.group_id" +
-                           "join \"subject\" on teacher.subject_id = subject.id" +
-                           $"where student.id = {id}";
-                                                                                                             
+                //string query = "select \"student\".firstname, teacher.firstname,\"subject\".name  from \"student\" " +
+                //    "join \"group\" on \"student\".group_id = \"group\".id " +
+                //    "join teacher on \"group\".id = teacher.group_id " +
+                //    "join \"subject\" on teacher.subject_id = subject.id" +
+                //    $"where student.id = {id}";
+
+
+                string query = $"select subject.name, \"group\".name , student.firstname from student join \"group\" on student.group_id = \"group\".id join teacher on \"group\".id = teacher.group_id join subject on teacher.subject_id = subject.id where student.id = {_id}";
+              
                 NpgsqlCommand com = new NpgsqlCommand(query, con);
 
                 NpgsqlDataReader reader = com.ExecuteReader();
-
-                return "Student " + reader.GetString(0) + "Teacher " + reader.GetString(1) + "Subject" + reader.GetString(2);
-
+                reader.Read();
+                return "Student :" + reader.GetString(2) + "\nGroup :" + reader.GetString(1) + "\nSubject :" + reader.GetString(0);
             }
             catch (Exception ex)
             {
                 return ex.Message;
+
             }
            
            
