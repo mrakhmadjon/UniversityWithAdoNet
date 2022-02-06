@@ -7,7 +7,7 @@ using UniversityWithAdoNet.Models;
 
 namespace UniversityWithAdoNet.IRepositories
 {
-     interface IStudentRespository
+     interface IStudentRepository
     {
         void Create(Student student);
         IList<Student> ReadAll();
@@ -17,6 +17,8 @@ namespace UniversityWithAdoNet.IRepositories
 
         void Delete(int id);
 
-        string GetStudentGroupAndTeacher(int id);
+        string GetStudentGroup(int id);
+
+        string GetStudentTeacherAndSubject(int id);
     }
 }

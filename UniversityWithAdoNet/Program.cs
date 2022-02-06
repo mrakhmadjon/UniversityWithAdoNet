@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using UniversityWithAdoNet.GetInfo;
+using UniversityWithAdoNet.IRepositories;
 using UniversityWithAdoNet.Models;
 using UniversityWithAdoNet.Repositories;
 
@@ -12,7 +13,7 @@ namespace UniversityWithAdoNet
     {
         static void Main(string[] args)
         {
-            StudentRepository rep = new StudentRepository();
+            IStudentRepository rep = new StudentRepository();
             GetStudentInfo getStudentInfo = new GetStudentInfo();
 
             #region student create
@@ -44,10 +45,10 @@ namespace UniversityWithAdoNet
             //    Console.WriteLine(student.FirstName);
             #endregion
 
-            #region student group and teacher
-
+            #region student group 
+                                                                                    
             Console.WriteLine("Guruhini bilmoqchi bolgan studentni ID sini kiriting");
-            Console.WriteLine(rep.GetStudentGroupAndTeacher(getStudentInfo.GetStudentId()));
+            Console.WriteLine(rep.GetStudentGroup(getStudentInfo.GetStudentId()));
 
             #endregion
 

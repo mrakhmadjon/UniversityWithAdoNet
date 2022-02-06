@@ -9,7 +9,7 @@ using UniversityWithAdoNet.Models;
 
 namespace UniversityWithAdoNet.Repositories
 {
-    internal class StudentRepository : IStudentRespository
+    internal class StudentRepository : IStudentRepository
     {
         NpgsqlConnection con = new NpgsqlConnection(Constants.DATAPATH);
 
@@ -90,7 +90,7 @@ namespace UniversityWithAdoNet.Repositories
             
         }
 
-        public string GetStudentGroupAndTeacher(int id)
+        public string GetStudentGroup(int id)
         {
             con.Open();
             try
@@ -108,6 +108,32 @@ namespace UniversityWithAdoNet.Repositories
 
                 return ex.Message;
             }
+           
+        }
+
+        public string GetStudentTeacherAndSubject(int id)
+        {
+            con.Open();
+            try
+            {
+                string query = "select student.firstname, teacher.firstname,\"subject\".name  from student" +
+                           "join \"group\" on student.group_id = \"group\".id" +
+                           "join teacher on \"group\".id = teacher.group_id" +
+                           "join \"subject\" on teacher.subject_id = subject.id" +
+                           $"where student.id = {id}";
+                                                                                                             
+                NpgsqlCommand com = new NpgsqlCommand(query, con);
+
+                NpgsqlDataReader reader = com.ExecuteReader();
+
+                return "Student " + reader.GetString(0) + "Teacher " + reader.GetString(1) + "Subject" + reader.GetString(2);
+
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+           
            
         }
 
