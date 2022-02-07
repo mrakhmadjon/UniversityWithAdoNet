@@ -17,9 +17,9 @@ namespace UniversityWithAdoNet
             GetStudentInfo getStudentInfo = new GetStudentInfo();
             ITeacherRepository teacherRepository = new TeacherRepository();
 
-            #region student create
+            //#region student create
             //rep.Create(getStudentInfo.GetStudent());
-            #endregion
+            //#endregion
 
             #region student delete
 
@@ -33,10 +33,10 @@ namespace UniversityWithAdoNet
 
             #region student getbyid
 
-            //Student stu = rep.GetById(getStudentInfo.GetStudentId());
+            Student stu = rep.GetById(getStudentInfo.GetStudentId());
 
-            //if (stu == null)
-            //    Console.WriteLine(1001);
+            if (stu == null)
+                Console.WriteLine(1001);
 
             #endregion
 
@@ -61,9 +61,9 @@ namespace UniversityWithAdoNet
             #endregion
 
 
-           
-                                                                
-                        
+
+
+
 
 
             #region ReadAllTeacher
