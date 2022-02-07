@@ -16,6 +16,7 @@ namespace UniversityWithAdoNet
             IStudentRepository rep = new StudentRepository();
             GetStudentInfo getStudentInfo = new GetStudentInfo();
             ITeacherRepository teacherRepository = new TeacherRepository();
+
             #region student create
             //rep.Create(getStudentInfo.GetStudent());
             #endregion
@@ -60,8 +61,9 @@ namespace UniversityWithAdoNet
             #endregion
 
 
-
-
+           
+                                                                
+                        
 
 
             #region ReadAllTeacher
@@ -99,10 +101,12 @@ namespace UniversityWithAdoNet
 
             #region TeacherUpdate
 
-            teacherRepository.Update(GetTeacherInfo.GetTeacherInf());
+            //teacherRepository.Update(GetTeacherInfo.GetTeacherInf());
 
 
             #endregion
+
+
         }
     }
 }
