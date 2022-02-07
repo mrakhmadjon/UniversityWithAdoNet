@@ -10,10 +10,13 @@ namespace UniversityWithAdoNet.IRepositories
     internal interface ITeacherRepository
     {
        
-        Teacher Read();
+        IList<Teacher> ReadAll();
+
+        Teacher ReadById(int id);
 
         void Update(Teacher student);
 
+        IList<Student> GetStudents(int group_id);
         
     }
 }

@@ -73,11 +73,11 @@ namespace UniversityWithAdoNet.GetInfo
         public int GetStudentId()
         {
         DelStart:
-            int delId;
+            int getId;
             try
             {
                 Console.WriteLine("ID ni kiriting");
-                delId = int.Parse(Console.ReadLine());
+                getId = int.Parse(Console.ReadLine());
 
             }
             catch
@@ -86,7 +86,7 @@ namespace UniversityWithAdoNet.GetInfo
                 Console.WriteLine("Id ni int tipida kiriting");
                 goto DelStart;
             }
-            return delId;
+            return getId;
         }
     }
 }

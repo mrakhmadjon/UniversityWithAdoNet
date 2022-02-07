@@ -13,7 +13,7 @@ namespace UniversityWithAdoNet.Models
 
         public string LastName { get; set; }
 
-        public string Subject_id { get; set; }
+        public int Subject_id { get; set; }
 
         public int Group_id { get; set; }
         public string Phone_Num { get; set; }
