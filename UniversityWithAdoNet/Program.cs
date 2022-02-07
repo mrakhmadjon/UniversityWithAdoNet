@@ -99,7 +99,7 @@ namespace UniversityWithAdoNet
 
             #region TeacherUpdate
 
-
+            teacherRepository.Update(GetTeacherInfo.GetTeacherInf());
 
 
             #endregion

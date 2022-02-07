@@ -128,19 +128,28 @@ namespace UniversityWithAdoNet.Repositories
 
         public void Update(Teacher teacher)
         {
-            con.Open();
-            string query = $"update table SET firstname = {teacher.FirstName},lastname = {teacher.LastName},phonenum = {teacher.Phone_Num},group_id = {teacher.Group_id},subject_id = {teacher.Subject_id} where id = {teacher.Id}";
-        
-            NpgsqlCommand cmd = new NpgsqlCommand(query, con);
+            try
+            {
+                con.Open();
+                string query = $"update teacher SET firstname = '{teacher.FirstName}',lastname = '{teacher.LastName}',phonenum = '{teacher.Phone_Num}',group_id = {teacher.Group_id},subject_id = {teacher.Subject_id} where id = {teacher.Id}";
 
-            int isUpdated = cmd.ExecuteNonQuery();
+                NpgsqlCommand cmd = new NpgsqlCommand(query, con);
 
-            if (isUpdated > 0)
-                Console.WriteLine("Yangilandi");
-            else
-                Console.WriteLine("Yangilanishda Xatolik");
-        
-        
+                int isUpdated = cmd.ExecuteNonQuery();
+
+                if (isUpdated > 0)
+                    Console.WriteLine("Yangilandi");
+                else
+                    Console.WriteLine("Yangilanishda Xatolik");
+
+
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+            }
+           
         
         }
 
