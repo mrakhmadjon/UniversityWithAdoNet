@@ -13,7 +13,7 @@ namespace UniversityWithAdoNet.Repositories
     {
         NpgsqlConnection con = new NpgsqlConnection(Constants.DATAPATH);
 
-        public IList<Student> GetStudents(int group_id)
+        public IList<Student> GetStudentsOfTeacher(int group_id)
         {
             try
             {

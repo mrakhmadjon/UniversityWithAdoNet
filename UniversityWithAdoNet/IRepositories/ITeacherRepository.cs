@@ -16,7 +16,7 @@ namespace UniversityWithAdoNet.IRepositories
 
         void Update(Teacher student);
 
-        IList<Student> GetStudents(int group_id);
+        IList<Student> GetStudentsOfTeacher(int group_id);
         
     }
 }
